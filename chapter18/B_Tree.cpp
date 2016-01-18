@@ -6,7 +6,7 @@
 *******************************************
 */
 
-//BÊ÷
+//Bæ ‘
 
 #include<iostream>
 #include<vector>
@@ -15,19 +15,19 @@ using namespace std;
 
 template < typename T, int degree = 3, typename Compare = less<T> >
 struct node
-{//BÊ÷½ÚµãÀàĞÍ,degreeÎª¶È£¬Ä¬ÈÏÎª3
-	static const int min_num = degree - 1;//Ã¿¸ö½ÚµãµÄ×îĞ¡¹Ø¼ü×ÖÊı
-	static const int max_num = 2 * degree - 1;//Ò¶×Ó½Úµã×î´ó¹Ø¼ü×ÖÊı£¬ÄÚ½ÚµãÒª¼õ1
+{//Bæ ‘èŠ‚ç‚¹ç±»å‹,degreeä¸ºåº¦ï¼Œé»˜è®¤ä¸º3
+	static const int min_num = degree - 1;//æ¯ä¸ªèŠ‚ç‚¹çš„æœ€å°å…³é”®å­—æ•°
+	static const int max_num = 2 * degree - 1;//å¶å­èŠ‚ç‚¹æœ€å¤§å…³é”®å­—æ•°ï¼Œå†…èŠ‚ç‚¹è¦å‡1
 	static Compare compare;
-	int num = 0;//¸Ã½Úµã¹Ø¼ü×ÖÊıÄ¿
-	size_t height = 0;//ÒÔ¸Ã½ÚµãÎª¸ùµÄÊ÷¸ß
-	bool leaf = true;//ÊÇ·ñÎªÒ¶×Ó½Úµã
-	T key[max_num];//¹Ø¼ü×ÖÊı×é
-	node *child[max_num + 1];//º¢×Ó½ÚµãÊı×é
+	int num = 0;//è¯¥èŠ‚ç‚¹å…³é”®å­—æ•°ç›®
+	size_t height = 0;//ä»¥è¯¥èŠ‚ç‚¹ä¸ºæ ¹çš„æ ‘é«˜
+	bool leaf = true;//æ˜¯å¦ä¸ºå¶å­èŠ‚ç‚¹
+	T key[max_num];//å…³é”®å­—æ•°ç»„
+	node *child[max_num + 1];//å­©å­èŠ‚ç‚¹æ•°ç»„
 
 	static void setCompare(const Compare &c){ compare = c; }
 	node()
-	{//Ä¬ÈÏ¹¹Ôìº¯Êı
+	{//é»˜è®¤æ„é€ å‡½æ•°
 		for (int i = 0; i != max_num; ++i)
 		{
 			key[i] = T();
@@ -40,42 +40,42 @@ struct node
 	bool erase(int);
 };
 
-//¶¨Òå¾²Ì¬±äÁ¿
+//å®šä¹‰é™æ€å˜é‡
 template < typename T, int degree, typename Compare> const int node<T, degree, Compare>::max_num;
 template < typename T, int degree, typename Compare> const int node<T, degree, Compare>::min_num;
 template < typename T, int degree, typename Compare> Compare node<T, degree, Compare>::compare;
 
 template < typename T, int degree = 3, typename Compare = less<T> >
 int node<T, degree,Compare>::search(const T &k)const
-{//½ÚµãÄÚ¹Ø¼ü×Ö²éÕÒ
+{//èŠ‚ç‚¹å†…å…³é”®å­—æŸ¥æ‰¾
 	int low = 0, high = num - 1;
 	while (low < high)
-	{//¶ş·Ö²éÕÒ
+	{//äºŒåˆ†æŸ¥æ‰¾
 		int mid = (low + high) / 2;
 		if (!compare(k,key[mid]) && !compare(key[mid],k)) return mid;
 		else if (compare(k,key[mid])) high = mid - 1;
 		else low = mid + 1;
 	}
 	if (compare(key[low], k) && low < num - 1) ++low;
-	return low;//·µ»ØµÚÒ»¸ö²»Ğ¡ÓÚkµÄ¹Ø¼ü×ÖµÄË÷Òı£¬Èç¹ûÈ«²¿¶¼±ÈkĞ¡£¬ÔòlowÊÇ×îºóÒ»¸ö¹Ø¼ü×ÖË÷Òı
+	return low;//è¿”å›ç¬¬ä¸€ä¸ªä¸å°äºkçš„å…³é”®å­—çš„ç´¢å¼•ï¼Œå¦‚æœå…¨éƒ¨éƒ½æ¯”kå°ï¼Œåˆ™lowæ˜¯æœ€åä¸€ä¸ªå…³é”®å­—ç´¢å¼•
 }
 
 template < typename T, int degree = 3, typename Compare = less<T> >
 void node<T, degree, Compare>::insert(const T &k)
-{//½ÚµãÄÚ²åÈë
+{//èŠ‚ç‚¹å†…æ’å…¥
 	int i = num - 1;
 	while (i >= 0 && compare(k,key[i]))
-	{//ÕÒÑ°²åÈëÎ»ÖÃ
+	{//æ‰¾å¯»æ’å…¥ä½ç½®
 		key[i + 1] = key[i];
 		--i;
 	}
-	key[++i] = k;//²åÈë
+	key[++i] = k;//æ’å…¥
 	++num;
 }
 
 template <typename T,int degree = 3,class Compare>
 bool node<T, degree, Compare>::erase(int index)
-{//½ÚµãÄÚÉ¾³ı
+{//èŠ‚ç‚¹å†…åˆ é™¤
 	for (int i = index + 1; i != num; ++i)
 		key[i - 1] = key[i];
 	--num;
@@ -84,24 +84,24 @@ bool node<T, degree, Compare>::erase(int index)
 
 template < typename T, int degree = 3, typename Compare = less<T> >
 class Btree
-{//BÊ÷
+{//Bæ ‘
 public:
 	typedef node<T, degree, Compare>					node;
 	typedef Compare										comp;
 private:
 	node *root;
 	Compare compare;
-	void destroy(node*);//Ïú»ÙÊ÷
-	node* split(node*, int);//·Ö¸î½Úµã
-	node* underfillSplit(node*, int);//Î´Âú·ÖÁÑ£¬Ê÷·ÖÁÑ×¨ÓÃ
-	void insert_aux(node*, const T&);//²åÈë¸¨Öú
-	bool erase_aux(node*, const T&);//É¾³ı¸¨Öú
-	void merge(node*, int);//ºÏ²¢½Úµã
-	T erasePredecessor(node*);//É¾³ıÇ°Çı
-	T eraseSuccessor(node*);//É¾³ıºó¼Ì
-	void borrowFromRightSibling(node*, int);//ÏòÓÒĞÖµÜ½è¹Ø¼ü×Ö
-	void borrowFromLeftSibling(node*, int);//Ïò×óĞÖµÜ½è¹Ø¼ü×Ö
-	void print(node*)const;//°´¹Ø¼ü×Ö·Çµİ¼õË³Ğò´òÓ¡
+	void destroy(node*);//é”€æ¯æ ‘
+	node* split(node*, int);//åˆ†å‰²èŠ‚ç‚¹
+	node* underfillSplit(node*, int);//æœªæ»¡åˆ†è£‚ï¼Œæ ‘åˆ†è£‚ä¸“ç”¨
+	void insert_aux(node*, const T&);//æ’å…¥è¾…åŠ©
+	bool erase_aux(node*, const T&);//åˆ é™¤è¾…åŠ©
+	void merge(node*, int);//åˆå¹¶èŠ‚ç‚¹
+	T erasePredecessor(node*);//åˆ é™¤å‰é©±
+	T eraseSuccessor(node*);//åˆ é™¤åç»§
+	void borrowFromRightSibling(node*, int);//å‘å³å…„å¼Ÿå€Ÿå…³é”®å­—
+	void borrowFromLeftSibling(node*, int);//å‘å·¦å…„å¼Ÿå€Ÿå…³é”®å­—
+	void print(node*)const;//æŒ‰å…³é”®å­—éé€’å‡é¡ºåºæ‰“å°
 	
 	node* nodeAtRightOfHeight(size_t);
 	node* nodeAtLeftOfHeight(size_t);
@@ -119,13 +119,13 @@ private:
 	void rootFull()
 	{
 		node *p = root;
-		root = new node;//Ê÷½«»á³¤¸ß
+		root = new node;//æ ‘å°†ä¼šé•¿é«˜
 		root->child[0] = p;
 		root->height = p->height + 1;
 		root->leaf = false;
-		split(root, 0);//Ê÷¸ù·ÖÁÑ
+		split(root, 0);//æ ‘æ ¹åˆ†è£‚
 	}
-	explicit Btree(node *r) :root(r), compare(r->compare){}//Ö»ÔÚ·ÖÁÑº¯ÊıÖĞ±»µ÷ÓÃ£¬Ë½ÓĞ
+	explicit Btree(node *r) :root(r), compare(r->compare){}//åªåœ¨åˆ†è£‚å‡½æ•°ä¸­è¢«è°ƒç”¨ï¼Œç§æœ‰
 public:
 	Btree() :root(nullptr), compare(Compare()){ node::setCompare(compare); }
 	Btree(const Compare &c) :root(nullptr), compare(c){ node::setCompare(c); }
@@ -133,8 +133,8 @@ public:
 	bool empty()const { return root == nullptr; }
 	void insert(const T&);
 	bool search(const T&)const;
-	void link(const T&, Btree&);//Ê÷Á¬½Ó
-	void splitTree(const T&,Btree&,Btree&);//Ê÷·ÖÁÑ
+	void link(const T&, Btree&);//æ ‘è¿æ¥ï¼Œé“¾æ¥ç›¸å…³éƒ½æ˜¯æ€è€ƒé¢˜18-2çš„å†…å®¹
+	void splitTree(const T&,Btree&,Btree&);//æ ‘åˆ†è£‚
 	void sequentialPrint()const { print(root); }
 	void clear()
 	{
@@ -147,88 +147,88 @@ public:
 
 template <typename T,int degree,class Compare>
 bool Btree<T,degree, Compare>::search(const T &k)const
-{//ÔÚBÊ÷ÖĞ²éÕÒk
+{//åœ¨Bæ ‘ä¸­æŸ¥æ‰¾k
 	node *curr = root;
 	while (curr != nullptr)
 	{
-		int index = curr->search(k);//ÔÚµ±Ç°½Úµã²éÕÒ
-		if (!compare(k, curr->key[index]) && !compare(curr->key[index], k)) return true;//Èô´æÔÚ
-		else if (compare(k,curr->key[index]))//ÈôkĞ¡ÓÚindex´¦µÄ¹Ø¼ü£¬ÔòÔÚÆä×ó±ß²éÕÒ
+		int index = curr->search(k);//åœ¨å½“å‰èŠ‚ç‚¹æŸ¥æ‰¾
+		if (!compare(k, curr->key[index]) && !compare(curr->key[index], k)) return true;//è‹¥å­˜åœ¨
+		else if (compare(k,curr->key[index]))//è‹¥kå°äºindexå¤„çš„å…³é”®ï¼Œåˆ™åœ¨å…¶å·¦è¾¹æŸ¥æ‰¾
 			curr = curr->child[index];
-		else curr = curr->child[index + 1];//·ñÔòÔÚÓÒ±ß²éÕÒ
+		else curr = curr->child[index + 1];//å¦åˆ™åœ¨å³è¾¹æŸ¥æ‰¾
 	}
 	return false;
 }
 
 template <typename T, int degree, class Compare>
 node<T,degree,Compare>* Btree<T, degree, Compare>::split(node *curr, int index)
-{//½«currËùÖ¸½ÚµãµÄindex´¦º¢×Ó½Úµã·Ö¸î³ÉÁ½¸ö½Úµã£¬Á½±ß¸÷degree - 1¸ö¹Ø¼ü×Ö£¬index´¦¹Ø¼ü×ÖÉÏÉıµ½currÖĞ
+{//å°†curræ‰€æŒ‡èŠ‚ç‚¹çš„indexå¤„å­©å­èŠ‚ç‚¹åˆ†å‰²æˆä¸¤ä¸ªèŠ‚ç‚¹ï¼Œä¸¤è¾¹å„degree - 1ä¸ªå…³é”®å­—ï¼Œindexå¤„å…³é”®å­—ä¸Šå‡åˆ°currä¸­
 	node *new_child = new node,*old_child = curr->child[index];
 	T k = old_child->key[degree - 1];
-	for (int first = 0; first != degree - 1; ++first)//½«Ô­½ÚµãµÄºóÒ»°ë¹Ø¼ü×Ö¸´ÖÆµ½ĞÂ½Úµã
+	for (int first = 0; first != degree - 1; ++first)//å°†åŸèŠ‚ç‚¹çš„åä¸€åŠå…³é”®å­—å¤åˆ¶åˆ°æ–°èŠ‚ç‚¹
 		new_child->key[first] = old_child->key[first + degree];
-	if (!old_child->leaf)//Èç¹û²»ÊÇÒ¶×Ó
-		for (int first = 0; first != degree; ++first)//Ôò»¹Òª¸´ÖÆÒ»°ëµÄº¢×Ó½ÚµãÖ¸Õë
+	if (!old_child->leaf)//å¦‚æœä¸æ˜¯å¶å­
+		for (int first = 0; first != degree; ++first)//åˆ™è¿˜è¦å¤åˆ¶ä¸€åŠçš„å­©å­èŠ‚ç‚¹æŒ‡é’ˆ
 			new_child->child[first] = old_child->child[first + degree];
 	new_child->leaf = old_child->leaf;
 	new_child->height = old_child->height;
-	new_child->num = degree - 1;//ĞÂ½Úµã¹Ø¼ü×ÖÊı
-	old_child->num -= degree;//Ô­½Úµã¹Ø¼ü×ÖÊı¼õ°ë
-	for (int last = curr->num - 1; last >= index; --last)//½«currÖĞindex£¨°üÀ¨£©Ö®ºóµÄ¹Ø¼ü×ÖÈ«²¿ºóÒÆÒ»¸öÎ»ÖÃ
+	new_child->num = degree - 1;//æ–°èŠ‚ç‚¹å…³é”®å­—æ•°
+	old_child->num -= degree;//åŸèŠ‚ç‚¹å…³é”®å­—æ•°å‡åŠ
+	for (int last = curr->num - 1; last >= index; --last)//å°†currä¸­indexï¼ˆåŒ…æ‹¬ï¼‰ä¹‹åçš„å…³é”®å­—å…¨éƒ¨åç§»ä¸€ä¸ªä½ç½®
 		curr->key[last + 1] = curr->key[last];
-	for (int last = curr->num; last > index; --last)//½«currÖĞindex£¨²»°üÀ¨£©Ö®ºóµÄº¢×ÓÖ¸ÕëÈ«²¿ºóÒÆÒ»¸öÎ»ÖÃ
+	for (int last = curr->num; last > index; --last)//å°†currä¸­indexï¼ˆä¸åŒ…æ‹¬ï¼‰ä¹‹åçš„å­©å­æŒ‡é’ˆå…¨éƒ¨åç§»ä¸€ä¸ªä½ç½®
 		curr->child[last + 1] = curr->child[last];
-	curr->key[index] = k;//ÔÚcurrÖĞµÄindex´¦ÌîÉÏÉıÉÏÀ´µÄ¹Ø¼ü×Ö
-	curr->child[index + 1] = new_child;//indexºóµÄº¢×ÓÖ¸ÕëÖ¸ÏòĞÂ½Úµã
+	curr->key[index] = k;//åœ¨currä¸­çš„indexå¤„å¡«ä¸Šå‡ä¸Šæ¥çš„å…³é”®å­—
+	curr->child[index + 1] = new_child;//indexåçš„å­©å­æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
 	++curr->num;
 	return new_child;
 }
 
 template <typename T,int degree,class Compare>
 void Btree<T, degree, Compare>::insert_aux(node *curr, const T &k)
-{//²åÈë¸¨Öúº¯Êı
-	if (curr->leaf) curr->insert(k);//Èôµ±Ç°½ÚµãÊÇÒ¶×Ó£¬ÔòÖ±½Ó²åÈë
+{//æ’å…¥è¾…åŠ©å‡½æ•°
+	if (curr->leaf) curr->insert(k);//è‹¥å½“å‰èŠ‚ç‚¹æ˜¯å¶å­ï¼Œåˆ™ç›´æ¥æ’å…¥
 	else
-	{//·ñÔò
-		int index = curr->search(k);//ÕÒµ½µÚÒ»¸ö²»Ğ¡ÓÚkµÄ¹Ø¼ü×ÖË÷Òı
-		if (compare(curr->key[index], k)) ++index;//¼«¶ËÇé¿ö£¬¸Ã½ÚµãËùÓĞ¹Ø¼ü×Ö¾ùĞ¡ÓÚk
+	{//å¦åˆ™
+		int index = curr->search(k);//æ‰¾åˆ°ç¬¬ä¸€ä¸ªä¸å°äºkçš„å…³é”®å­—ç´¢å¼•
+		if (compare(curr->key[index], k)) ++index;//æç«¯æƒ…å†µï¼Œè¯¥èŠ‚ç‚¹æ‰€æœ‰å…³é”®å­—å‡å°äºk
 		if ((curr->child[index])->num == node::max_num)
-		{//Èô¸ÃËùÒı´¦µÄº¢×Ó½Úµã¹Ø¼ü×ÖÊıÒÑÂú
-			split(curr, index);//Ôò½«Æä´Ó¸Ã´¦·Ö¸î
-			if (compare(curr->key[index], k))//·Ö¸îºóÉÏÉıÉÏÀ´µÄ¹Ø¼ü×ÖÈôĞ¡ÓÚk
-				++index;//Ôò½«Òªµ½ĞÂÉú³ÉµÄ½ÚµãÖĞ¼ÌĞø²åÈë
+		{//è‹¥è¯¥æ‰€å¼•å¤„çš„å­©å­èŠ‚ç‚¹å…³é”®å­—æ•°å·²æ»¡
+			split(curr, index);//åˆ™å°†å…¶ä»è¯¥å¤„åˆ†å‰²
+			if (compare(curr->key[index], k))//åˆ†å‰²åä¸Šå‡ä¸Šæ¥çš„å…³é”®å­—è‹¥å°äºk
+				++index;//åˆ™å°†è¦åˆ°æ–°ç”Ÿæˆçš„èŠ‚ç‚¹ä¸­ç»§ç»­æ’å…¥
 		}
-		insert_aux(curr->child[index], k);//µİ¹é²åÈë
+		insert_aux(curr->child[index], k);//é€’å½’æ’å…¥
 	}
 }
 
 template <typename T, int degree, class Compare>
 void Btree<T, degree, Compare>::insert(const T &k)
-{//²åÈë¹Ø¼ü×Ö
+{//æ’å…¥å…³é”®å­—
 	if (root == nullptr)
-	{//Èç¹ûÔÚ¿ÕÊ÷ÖĞ²åÈëµÚÒ»¸ö¹Ø¼ü×Ö
+	{//å¦‚æœåœ¨ç©ºæ ‘ä¸­æ’å…¥ç¬¬ä¸€ä¸ªå…³é”®å­—
 		root = new node;
 		root->insert(k);
 		return;
 	}
-	else if (root->num == node::max_num)//·ñÔòÈç¹û¸ù½ÚµãÂú
+	else if (root->num == node::max_num)//å¦åˆ™å¦‚æœæ ¹èŠ‚ç‚¹æ»¡
 		rootFull();
 	insert_aux(root, k);
 }
 
 template <typename T,int degree,class Compare>
 void Btree<T, degree, Compare>::merge(node *curr, int index)
-{//ºÏ²¢currÖĞindex´¦µÄº¢×Ó½ÚµãºÍÆäÓÒĞÖµÜ£¬´ËÊ±Á½Õß¾ùÇ¡ºÃÖ»ÓĞdegree - 1¸ö¹Ø¼ü×Ö
+{//åˆå¹¶currä¸­indexå¤„çš„å­©å­èŠ‚ç‚¹å’Œå…¶å³å…„å¼Ÿï¼Œæ­¤æ—¶ä¸¤è€…å‡æ°å¥½åªæœ‰degree - 1ä¸ªå…³é”®å­—
 	node *left = curr->child[index], *right = curr->child[index + 1];
-	left->key[degree - 1] = curr->key[index];//currÖĞindex´¦¹Ø¼ü×ÖÏÈÏÂ½µ
-	for (int i = 0; i != right->num; ++i)//¸´ÖÆrightËùÓĞ¹Ø¼ü×Ö¹ıÀ´
+	left->key[degree - 1] = curr->key[index];//currä¸­indexå¤„å…³é”®å­—å…ˆä¸‹é™
+	for (int i = 0; i != right->num; ++i)//å¤åˆ¶rightæ‰€æœ‰å…³é”®å­—è¿‡æ¥
 		left->key[degree + i] = right->key[i];
-	for (int i = index + 1; i != curr->num; ++i)//½«currÖĞindexÖ®ºóµÄ¹Ø¼ü×ÖÇ°ÒÆ1
+	for (int i = index + 1; i != curr->num; ++i)//å°†currä¸­indexä¹‹åçš„å…³é”®å­—å‰ç§»1
 		curr->key[i - 1] = curr->key[i];
-	if (!left->leaf)//Èç¹û²»ÊÇÒ¶×Ó
-		for (int i = 0; i <= right->num; ++i)//Ôò»¹ÒªÒÆ¶¯rightµÄº¢×ÓÖ¸Õë
+	if (!left->leaf)//å¦‚æœä¸æ˜¯å¶å­
+		for (int i = 0; i <= right->num; ++i)//åˆ™è¿˜è¦ç§»åŠ¨rightçš„å­©å­æŒ‡é’ˆ
 			left->child[degree + i] = right->child[i];
-	for (int i = index + 2; i <= curr->num; ++i)//ÒÆ¶¯currÖĞindex+2£¨°üÀ¨£©Ö¸ÕëÇ°ÒÆ1£¬index´¦²»±Ø±»¸²¸Ç
+	for (int i = index + 2; i <= curr->num; ++i)//ç§»åŠ¨currä¸­index+2ï¼ˆåŒ…æ‹¬ï¼‰æŒ‡é’ˆå‰ç§»1ï¼Œindexå¤„ä¸å¿…è¢«è¦†ç›–
 		curr->child[i - 1] = curr->child[i];
 	--curr->num; ++left->num;
 	left->num += right->num;
@@ -237,54 +237,54 @@ void Btree<T, degree, Compare>::merge(node *curr, int index)
 
 template <typename T,int degree,class Compare>
 T Btree<T, degree, Compare>::erasePredecessor(node *curr)
-{//É¾³ıÇ°Çı£¬ÔÚÇé¿ö2.aÖĞ±»µ÷ÓÃ
+{//åˆ é™¤å‰é©±ï¼Œåœ¨æƒ…å†µ2.aä¸­è¢«è°ƒç”¨
 	if (curr->leaf)
-	{//ÈôÊÇÒ¶×Ó£¬ÔòËµÃ÷ÒÑ¾­¿ÉÒÔÉ¾³ı×îºóÒ»¸öÔªËØ£¬¼´Ç°ÇıÁË
+	{//è‹¥æ˜¯å¶å­ï¼Œåˆ™è¯´æ˜å·²ç»å¯ä»¥åˆ é™¤æœ€åä¸€ä¸ªå…ƒç´ ï¼Œå³å‰é©±äº†
 		T tmp = curr->key[curr->num - 1];
 		--curr->num;
-		return tmp;//·µ»ØÇ°Çı
+		return tmp;//è¿”å›å‰é©±
 	}
-	//·ñÔòÊÇÄÚ½Úµã£¬¼ÌĞøµİ¹éÏòÏÂ£¿
+	//å¦åˆ™æ˜¯å†…èŠ‚ç‚¹ï¼Œç»§ç»­é€’å½’å‘ä¸‹ï¼Ÿ
 	else if (curr->child[curr->num]->num == node::min_num)
-	{//Èô×îºóÒ»¸öº¢×Ó¹Ø¼ü×ÖÊıÄ¿ÒÑ´ï×îĞ¡Öµ
-		if (curr->child[curr->num - 1]->num > node::min_num)//Èô×óĞÖµÜÓĞ¶àÓà¹Ø¼ü×Ö
-			borrowFromLeftSibling(curr, curr->num);//ÄÇÃ´½èÒ»¸ö
-		else merge(curr, curr->num - 1);//·ñÔòÖ»ÓĞºÏ²¢ÁË
+	{//è‹¥æœ€åä¸€ä¸ªå­©å­å…³é”®å­—æ•°ç›®å·²è¾¾æœ€å°å€¼
+		if (curr->child[curr->num - 1]->num > node::min_num)//è‹¥å·¦å…„å¼Ÿæœ‰å¤šä½™å…³é”®å­—
+			borrowFromLeftSibling(curr, curr->num);//é‚£ä¹ˆå€Ÿä¸€ä¸ª
+		else merge(curr, curr->num - 1);//å¦åˆ™åªæœ‰åˆå¹¶äº†
 	}
-	return erasePredecessor(curr->child[curr->num]);//¼ÌĞøÏòÏÂµİ¹é
+	return erasePredecessor(curr->child[curr->num]);//ç»§ç»­å‘ä¸‹é€’å½’
 }
 
 template <typename T,int degree,class Compare>
 T Btree<T, degree, Compare>::eraseSuccessor(node *curr)
-{//É¾³ıºó¼Ì£¬ÔÚÇé¿ö2.bÖĞ±»µ÷ÓÃ
+{//åˆ é™¤åç»§ï¼Œåœ¨æƒ…å†µ2.bä¸­è¢«è°ƒç”¨
 	if (curr->leaf)
-	{//ÈôÊÇÒ¶×Ó½Úµã£¬ÔòÖ±½ÓÉ¾³ı×îÇ°ÃæÔªËØ£¬¼´ºó¼Ì
+	{//è‹¥æ˜¯å¶å­èŠ‚ç‚¹ï¼Œåˆ™ç›´æ¥åˆ é™¤æœ€å‰é¢å…ƒç´ ï¼Œå³åç»§
 		T tmp = curr->key[0];
 		curr->erase(0);
 		return tmp;
 	}
-	//·ñÔò£¬ÊÇÄÚ½Úµã£¬¼ÌĞøÏòÏÂ£¿
+	//å¦åˆ™ï¼Œæ˜¯å†…èŠ‚ç‚¹ï¼Œç»§ç»­å‘ä¸‹ï¼Ÿ
 	else if (curr->child[0]->num == node::min_num)
-	{//ÈôµÚÒ»¸öº¢×Ó¹Ø¼ü×ÖÊıÄ¿ÒÑ´ï×îĞ¡Öµ
-		if (curr->child[1]->num > node::min_num)//ÈôÓÒĞÖµÜÓĞ×ã¹»¹Ø¼ü×Ö
-			borrowFromRightSibling(curr, 0);//Ôò½èÒ»¸ö
-		else merge(curr, 0);//·ñÔòÖ»ÓĞºÏ²¢ÁË
+	{//è‹¥ç¬¬ä¸€ä¸ªå­©å­å…³é”®å­—æ•°ç›®å·²è¾¾æœ€å°å€¼
+		if (curr->child[1]->num > node::min_num)//è‹¥å³å…„å¼Ÿæœ‰è¶³å¤Ÿå…³é”®å­—
+			borrowFromRightSibling(curr, 0);//åˆ™å€Ÿä¸€ä¸ª
+		else merge(curr, 0);//å¦åˆ™åªæœ‰åˆå¹¶äº†
 	}
-	return eraseSuccessor(curr->child[0]);//¼ÌĞøÏòÏÂµİ¹é
+	return eraseSuccessor(curr->child[0]);//ç»§ç»­å‘ä¸‹é€’å½’
 }
 
 template <typename T,int degree,class Compare>
 void Btree<T, degree, Compare>::borrowFromRightSibling(node *curr, int index)
-{//currÖĞindexº¢×ÓÏòÆäÓÒĞÖµÜ½èÒ»¸ö¹Ø¼ü×Ö
+{//currä¸­indexå­©å­å‘å…¶å³å…„å¼Ÿå€Ÿä¸€ä¸ªå…³é”®å­—
 	node *left = curr->child[index], *right = curr->child[index + 1];
-	left->key[left->num] = curr->key[index];//ÏÈ½«currÖĞindex´¦µÄ¹Ø¼ü×ÖÌíÈë¸Ã×ÓÊ÷¸ù£¬leftËùÖ¸
-	curr->key[index] = right->key[0];//ÔÙÓÃÓÒĞÖµÜ£¨rightËùÖ¸£©µÚÒ»¸ö¹Ø¼ü×Ö¸²¸ÇcurrÖĞindex²ÛÎ»
-	for (int i = 1; i != right->num; ++i)//½«ÓÒĞÖµÜ´Ó1¿ªÊ¼µÄËùÓĞ¹Ø¼ü×ÖÇ°ÒÆ1
+	left->key[left->num] = curr->key[index];//å…ˆå°†currä¸­indexå¤„çš„å…³é”®å­—æ·»å…¥è¯¥å­æ ‘æ ¹ï¼Œleftæ‰€æŒ‡
+	curr->key[index] = right->key[0];//å†ç”¨å³å…„å¼Ÿï¼ˆrightæ‰€æŒ‡ï¼‰ç¬¬ä¸€ä¸ªå…³é”®å­—è¦†ç›–currä¸­indexæ§½ä½
+	for (int i = 1; i != right->num; ++i)//å°†å³å…„å¼Ÿä»1å¼€å§‹çš„æ‰€æœ‰å…³é”®å­—å‰ç§»1
 		right->key[i - 1] = right->key[i];
 	if (!left->leaf)
-	{//Èô²¢·ÇÒ¶×Ó£¬Ôò»¹ÒªÉèÖÃÏà¹Øº¢×ÓÖ¸ÕëÓò
-		left->child[left->num + 1] = right->child[0];//ÓÒĞÖµÜµÚÒ»¸öº¢×Ó³ÉÎªleft×îºóÒ»¸öº¢×Ó
-		for (int i = 1; i <= right->num; ++i)//Ç°ÒÆÓÒĞÖµÜµÄº¢×ÓÖ¸ÕëÊı×é
+	{//è‹¥å¹¶éå¶å­ï¼Œåˆ™è¿˜è¦è®¾ç½®ç›¸å…³å­©å­æŒ‡é’ˆåŸŸ
+		left->child[left->num + 1] = right->child[0];//å³å…„å¼Ÿç¬¬ä¸€ä¸ªå­©å­æˆä¸ºleftæœ€åä¸€ä¸ªå­©å­
+		for (int i = 1; i <= right->num; ++i)//å‰ç§»å³å…„å¼Ÿçš„å­©å­æŒ‡é’ˆæ•°ç»„
 			right->child[i - 1] = right->child[i];
 	}
 	++left->num; --right->num;
@@ -293,12 +293,12 @@ void Btree<T, degree, Compare>::borrowFromRightSibling(node *curr, int index)
 template <typename T,int degree,class Compare>
 void Btree<T, degree, Compare>::borrowFromLeftSibling(node *curr, int index)
 {
-	--index;//ÒÆµ½×óĞÖµÜ²ÛÎ»
+	--index;//ç§»åˆ°å·¦å…„å¼Ÿæ§½ä½
 	node *left = curr->child[index], *right = curr->child[index + 1];
 	right->insert(curr->key[index]);
 	curr->key[index] = left->key[left->num - 1];
 	if (!right->leaf)
-	{//·ÇÒ¶×Ó£¬ÒÆ¶¯Ö¸Õë
+	{//éå¶å­ï¼Œç§»åŠ¨æŒ‡é’ˆ
 		for (int i = right->num; i >= 0; --i)
 			right->child[i + 1] = right->child[i];
 		right->child[0] = left->child[left->num];
@@ -308,49 +308,49 @@ void Btree<T, degree, Compare>::borrowFromLeftSibling(node *curr, int index)
 
 template <typename T,int degree,class Compare>
 bool Btree<T, degree, Compare>::erase_aux(node *curr, const T &k)
-{//É¾³ı¸¨Öúº¯Êı
-	int index = curr->search(k);//ÕÒµ½µÚÒ»¸ö²»Ğ¡ÓÚkµÄ¹Ø¼ü×Ö
+{//åˆ é™¤è¾…åŠ©å‡½æ•°
+	int index = curr->search(k);//æ‰¾åˆ°ç¬¬ä¸€ä¸ªä¸å°äºkçš„å…³é”®å­—
 	if (curr->leaf && (!compare(curr->key[index], k) && !compare(k, curr->key[index])))
-		return curr->erase(index);//Çé¿ö1£¬¹Ø¼ü×ÖÔÚÒ¶×Ó
-	else if (curr->leaf) return false;//²»ÔÚÒ¶×Ó½Úµã£¬ÔòÉ¾³ıÊ§°Ü£¬²»´æÔÚ¸Ã¹Ø¼ü×Ö
+		return curr->erase(index);//æƒ…å†µ1ï¼Œå…³é”®å­—åœ¨å¶å­
+	else if (curr->leaf) return false;//ä¸åœ¨å¶å­èŠ‚ç‚¹ï¼Œåˆ™åˆ é™¤å¤±è´¥ï¼Œä¸å­˜åœ¨è¯¥å…³é”®å­—
 	if (!curr->leaf && (!compare(curr->key[index], k) && !compare(k, curr->key[index])))
-	{//Çé¿ö2£¬¹Ø¼ü×ÖÔÚ¸ÃÄÚ½Úµã¡£ÔòÊ¹ÓÃ¸Ã¹Ø¼ü×ÖµÄÇ°Çı»òÕßºó¼Ì´úÌæ
+	{//æƒ…å†µ2ï¼Œå…³é”®å­—åœ¨è¯¥å†…èŠ‚ç‚¹ã€‚åˆ™ä½¿ç”¨è¯¥å…³é”®å­—çš„å‰é©±æˆ–è€…åç»§ä»£æ›¿
 		if (curr->child[index]->num > node::min_num)
-		{//Çé¿ö2.a£¬Æä×óº¢×ÓÓĞ×ã¹»µÄ¹Ø¼ü×Ö£¬¼´ÖÁÉÙdegree - 1¸ö£¬ÔòÊ¹ÓÃÇ°Çı´úÌæ¡£
-			//É¾³ıÆäÇ°Çı£¬²¢·µ»ØÇ°Çı¹Ø¼ü×Ö£¬ÒÔ¸²¸Ç¸Ã¹Ø¼ü×Ö
+		{//æƒ…å†µ2.aï¼Œå…¶å·¦å­©å­æœ‰è¶³å¤Ÿçš„å…³é”®å­—ï¼Œå³è‡³å°‘degree - 1ä¸ªï¼Œåˆ™ä½¿ç”¨å‰é©±ä»£æ›¿ã€‚
+			//åˆ é™¤å…¶å‰é©±ï¼Œå¹¶è¿”å›å‰é©±å…³é”®å­—ï¼Œä»¥è¦†ç›–è¯¥å…³é”®å­—
 			curr->key[index] = erasePredecessor(curr->child[index]);
 			return true;
 		}
 		else if (curr->child[index + 1]->num > node::min_num)
-		{//Çé¿ö2.b£¬·ñÔòÆäÓÒº¢×ÓÓĞ×ã¹»¹Ø¼ü×Ö£¬ÔòÊ¹ÓÃºó¼Ì´úÌæ
-			curr->key[index] = eraseSuccessor(curr->child[index + 1]);//Í¬ÉÏ
+		{//æƒ…å†µ2.bï¼Œå¦åˆ™å…¶å³å­©å­æœ‰è¶³å¤Ÿå…³é”®å­—ï¼Œåˆ™ä½¿ç”¨åç»§ä»£æ›¿
+			curr->key[index] = eraseSuccessor(curr->child[index + 1]);//åŒä¸Š
 			return true;
 		}
 		else
-		{//·ñÔò£¬ÓÉÓÚ¸Ã¹Ø¼ü×Ö×óÓÒº¢×ÓµÄ¹Ø¼ü×ÖÊı¾ù´¦ÓÚ×îÉÙ£¬Ôò²»ÄÜ²ÉÓÃÇ°Çı»òÕßºó¼Ì´úÌæ£¬ÄÇÃ´ºÏ²¢×óÓÒº¢×ÓÒÔ¼°¸Ã¹Ø¼ü×Ö
-			merge(curr, index);//½«curr½ÚµãµÄindex´¦Ïà¹Ø¹Ø¼ü×ÖºÍº¢×ÓºÏ²¢
+		{//å¦åˆ™ï¼Œç”±äºè¯¥å…³é”®å­—å·¦å³å­©å­çš„å…³é”®å­—æ•°å‡å¤„äºæœ€å°‘ï¼Œåˆ™ä¸èƒ½é‡‡ç”¨å‰é©±æˆ–è€…åç»§ä»£æ›¿ï¼Œé‚£ä¹ˆåˆå¹¶å·¦å³å­©å­ä»¥åŠè¯¥å…³é”®å­—
+			merge(curr, index);//å°†currèŠ‚ç‚¹çš„indexå¤„ç›¸å…³å…³é”®å­—å’Œå­©å­åˆå¹¶
 			return erase_aux(curr->child[index], k);
 		}
 	}
 	else
-	{//Çé¿ö3£¬¹Ø¼ü×Ö²»ÔÚ¸Ã½Úµã£¬´¦ÓÚ¸Ã¹Ø¼ü×ÖµÄ×ó×ÓÊ÷ÖĞ
-		if (compare(curr->key[index], k)) ++index;//¼«¶ËÇé¿ö£¬µ±currÖĞËùÓĞ¹Ø¼ü×Ö¾ù±ÈkĞ¡Ê±³öÏÖ
+	{//æƒ…å†µ3ï¼Œå…³é”®å­—ä¸åœ¨è¯¥èŠ‚ç‚¹ï¼Œå¤„äºè¯¥å…³é”®å­—çš„å·¦å­æ ‘ä¸­
+		if (compare(curr->key[index], k)) ++index;//æç«¯æƒ…å†µï¼Œå½“currä¸­æ‰€æœ‰å…³é”®å­—å‡æ¯”kå°æ—¶å‡ºç°
 		if (curr->child[index]->num == node::min_num)
-		{//Èô×ó×ÓÊ÷¹Ø¼ü×ÖÊıÒÑµ½´ï×îĞ¡Öµ
+		{//è‹¥å·¦å­æ ‘å…³é”®å­—æ•°å·²åˆ°è¾¾æœ€å°å€¼
 			if (index < curr->num && curr->child[index + 1]->num > node::min_num)
-				//Çé¿ö3.a£¬´æÔÚÓÒĞÖµÜ£¬ÇÒÓĞ×ã¹»½Úµã£¬¼´ÖÁÉÙdegree - 1¸ö£¬ÔòÏòÆä½èÒ»¸ö
+				//æƒ…å†µ3.aï¼Œå­˜åœ¨å³å…„å¼Ÿï¼Œä¸”æœ‰è¶³å¤ŸèŠ‚ç‚¹ï¼Œå³è‡³å°‘degree - 1ä¸ªï¼Œåˆ™å‘å…¶å€Ÿä¸€ä¸ª
 				borrowFromRightSibling(curr, index);
 			else if (index > 0 && curr->child[index - 1]->num > node::min_num)
-				//Çé¿ö3.b,´æÔÚ×óĞÖµÜÇÒ¹Ø¼ü×ÖÊı×ã¹»£¬ÀàËÆÓÚ3.a
+				//æƒ…å†µ3.b,å­˜åœ¨å·¦å…„å¼Ÿä¸”å…³é”®å­—æ•°è¶³å¤Ÿï¼Œç±»ä¼¼äº3.a
 				borrowFromLeftSibling(curr, index);
 			else
-			{//3.c£¬×ó/ÓÒĞÖµÜ¾ùÖ»ÓĞdegree - 1¸ö¹Ø¼ü×Ö£¬ÄÇÃ´ºÏ²¢½Úµã
-				if (index == curr->num) --index;//ºôÓ¦ÉÏÊö¼«¶ËÇé¿öÏÂµÄ½ÚµãºÏ²¢
+			{//3.cï¼Œå·¦/å³å…„å¼Ÿå‡åªæœ‰degree - 1ä¸ªå…³é”®å­—ï¼Œé‚£ä¹ˆåˆå¹¶èŠ‚ç‚¹
+				if (index == curr->num) --index;//å‘¼åº”ä¸Šè¿°æç«¯æƒ…å†µä¸‹çš„èŠ‚ç‚¹åˆå¹¶
 				merge(curr, index);
 				if (curr == root && curr->num == 0)
-				{//Èôµ±Ç°currÊÇ¸ù£¬ÇÒ½ö´æÒ»¸öÔªËØ
+				{//è‹¥å½“å‰curræ˜¯æ ¹ï¼Œä¸”ä»…å­˜ä¸€ä¸ªå…ƒç´ 
 					root = curr->child[index];
-					delete curr;//ÄÇÃ´Ê÷¸ß½µ1
+					delete curr;//é‚£ä¹ˆæ ‘é«˜é™1
 					return erase_aux(root, k);
 				}
 			}
@@ -361,20 +361,20 @@ bool Btree<T, degree, Compare>::erase_aux(node *curr, const T &k)
 
 template <typename T,int degree,class Compare>
 void Btree<T, degree, Compare>::print(node *curr)const
-{//´òÓ¡Õû¿ÃÊ÷
+{//æ‰“å°æ•´æ£µæ ‘
 	if (curr == nullptr) return;
 	if (curr->leaf)
-	{//ÈôÊÇÒ¶×Ó½Úµã£¬Ôò´òÓ¡È«²¿¹Ø¼ü×Ö
+	{//è‹¥æ˜¯å¶å­èŠ‚ç‚¹ï¼Œåˆ™æ‰“å°å…¨éƒ¨å…³é”®å­—
 		cout << "[ ";
 		for (int i = 0; i != curr->num; ++i)
 			cout << curr->key[i] << ' ';
 		cout << "]\theight: " << curr->height << endl;
 	}
 	else
-	{//·ñÔò
+	{//å¦åˆ™
 		cout << '{' << endl;
 		for (int i = 0; i <= curr->num; ++i)
-		{//ÒÀ´Î´òÓ¡º¢×ÓºÍ¹Ø¼ü×Ö
+		{//ä¾æ¬¡æ‰“å°å­©å­å’Œå…³é”®å­—
 			print(curr->child[i]);
 			if (i < curr->num)
 				cout << curr->key[i] << endl;
@@ -385,28 +385,28 @@ void Btree<T, degree, Compare>::print(node *curr)const
 
 template <typename T,int degree,class Compare>
 void Btree<T, degree, Compare>::destroy(node *curr)
-{//Ïú»ÙBÊ÷
+{//é”€æ¯Bæ ‘
 	if (curr == nullptr) return;
-	if (curr->leaf) delete curr;//ÈôÊÇÒ¶×Ó£¬Ö±½ÓÏú»Ù
+	if (curr->leaf) delete curr;//è‹¥æ˜¯å¶å­ï¼Œç›´æ¥é”€æ¯
 	else
-	{//·ñÔò
-		for (int i = 0; i <= curr->num; ++i)//ÒÀ´ÎÏú»ÙËùÓĞº¢×Óºó
+	{//å¦åˆ™
+		for (int i = 0; i <= curr->num; ++i)//ä¾æ¬¡é”€æ¯æ‰€æœ‰å­©å­å
 			destroy(curr->child[i]);
-		delete curr;//ÔÙÏú»Ù¸Ã½Úµã
+		delete curr;//å†é”€æ¯è¯¥èŠ‚ç‚¹
 	}
 }
 
 template <typename T,int degree,class Compare = less<T>>
 node<T, degree, Compare>* Btree<T, degree, Compare>::nodeAtRightOfHeight(size_t h)
-{//ÕÒµ½¸ø¶¨¸ß¶ÈµÄ×îÓÒ²à½ÚµãµÄ¸¸Ç×»òÕßµ±Ê÷¸ßÎªhÊ±·µ»ØÊ÷¸ù£¬¸øÊ÷ÓÒºÏ²¢×ö×¼±¸£¬ÏÂ½µÑ°ÕÒÊ±¶ÔÓÚÂúµÄ½ÚµãÒªÓèÒÔ·ÖÁÑ
-	if (root->num == node::max_num)//Èç¹û¸ù½ÚµãÂú
+{//æ‰¾åˆ°ç»™å®šé«˜åº¦çš„æœ€å³ä¾§èŠ‚ç‚¹çš„çˆ¶äº²æˆ–è€…å½“æ ‘é«˜ä¸ºhæ—¶è¿”å›æ ‘æ ¹ï¼Œç»™æ ‘å³åˆå¹¶åšå‡†å¤‡ï¼Œä¸‹é™å¯»æ‰¾æ—¶å¯¹äºæ»¡çš„èŠ‚ç‚¹è¦äºˆä»¥åˆ†è£‚
+	if (root->num == node::max_num)//å¦‚æœæ ¹èŠ‚ç‚¹æ»¡
 		rootFull();
 	node *curr = root;
-	if (curr->height == h) return curr;//Èô¸ùÕıÊÇ¸Ã½Úµã
+	if (curr->height == h) return curr;//è‹¥æ ¹æ­£æ˜¯è¯¥èŠ‚ç‚¹
 	while (curr->child[curr->num]->height != h)
-	{//Ò»Ö±Íù×îÓÒÏÂÕÒ
-		if (curr->child[curr->num]->num == node::max_num)//Èô×îÓÒº¢×ÓÂú
-			curr = split(curr, curr->num);//Ôò·ÖÁÑ£¬ĞŞ¸ÄÁËÒ»ÏÂsplitº¯Êı£¬Ê¹Æä·µ»ØĞÂº¢×ÓµØÖ·
+	{//ä¸€ç›´å¾€æœ€å³ä¸‹æ‰¾
+		if (curr->child[curr->num]->num == node::max_num)//è‹¥æœ€å³å­©å­æ»¡
+			curr = split(curr, curr->num);//åˆ™åˆ†è£‚ï¼Œä¿®æ”¹äº†ä¸€ä¸‹splitå‡½æ•°ï¼Œä½¿å…¶è¿”å›æ–°å­©å­åœ°å€
 		else
 			curr = curr->child[curr->num];
 	}
@@ -415,14 +415,14 @@ node<T, degree, Compare>* Btree<T, degree, Compare>::nodeAtRightOfHeight(size_t 
 
 template <typename T, int degree, class Compare = less<T>>
 node<T, degree, Compare>* Btree<T, degree, Compare>::nodeAtLeftOfHeight(size_t h)
-{//ÕÒµ½¸ø¶¨¸ß¶ÈµÄ×î×ó²à½ÚµãµÄ¸¸Ç×£¬¸øÊ÷×óºÏ²¢×ö×¼±¸£¬ÏÂ½µÑ°ÕÒÊ±¶ÔÓÚÂúµÄ½ÚµãÒªÓèÒÔ·ÖÁÑ
-	if (root->num == node::max_num)//Èç¹û¸ù½ÚµãÂú
+{//æ‰¾åˆ°ç»™å®šé«˜åº¦çš„æœ€å·¦ä¾§èŠ‚ç‚¹çš„çˆ¶äº²ï¼Œç»™æ ‘å·¦åˆå¹¶åšå‡†å¤‡ï¼Œä¸‹é™å¯»æ‰¾æ—¶å¯¹äºæ»¡çš„èŠ‚ç‚¹è¦äºˆä»¥åˆ†è£‚
+	if (root->num == node::max_num)//å¦‚æœæ ¹èŠ‚ç‚¹æ»¡
 		rootFull();
 	node *curr = root;
 	while (curr->child[0]->height != h)
-	{//Ò»Ö±Íù×îÓÒÏÂÕÒ
-		if (curr->child[0]->num == node::max_num)//Èô×îÓÒº¢×ÓÂú
-			split(curr, 0);//Ôò·ÖÁÑ
+	{//ä¸€ç›´å¾€æœ€å³ä¸‹æ‰¾
+		if (curr->child[0]->num == node::max_num)//è‹¥æœ€å³å­©å­æ»¡
+			split(curr, 0);//åˆ™åˆ†è£‚
 		curr = curr->child[0];
 	}
 	return curr;
@@ -433,7 +433,7 @@ void Btree<T, degree, Compare>::linkAtRight(const T &k, Btree &rhs)
 {
 	node *curr = nodeAtRightOfHeight(rhs.root->height);
 	if (curr == root && curr->height == rhs.root->height)
-	{//ÈôÁ½¿ÃÊ÷ÕıºÃÒ»Ñù¸ß
+	{//è‹¥ä¸¤æ£µæ ‘æ­£å¥½ä¸€æ ·é«˜
 		root = new node;
 		root->insert(k);
 		root->child[0] = curr;
@@ -442,7 +442,7 @@ void Btree<T, degree, Compare>::linkAtRight(const T &k, Btree &rhs)
 		root->leaf = false;
 	}
 	else
-	{//·ñÔò£¬Ö±½Ó°Ñ¹Ø¼ük²åÈëcurr£¬È»ºó½«×îÓÒº¢×ÓÖ¸ÕëÖ¸Ïò±»ºÏ²¢Ê÷¡£ÒòÎªÒ»Â··ÖÁÑÏÂÀ´£¬curr²»¿ÉÄÜÂú
+	{//å¦åˆ™ï¼Œç›´æ¥æŠŠå…³é”®kæ’å…¥currï¼Œç„¶åå°†æœ€å³å­©å­æŒ‡é’ˆæŒ‡å‘è¢«åˆå¹¶æ ‘ã€‚å› ä¸ºä¸€è·¯åˆ†è£‚ä¸‹æ¥ï¼Œcurrä¸å¯èƒ½æ»¡
 		curr->insert(k);
 		curr->child[curr->num] = rhs.root;
 	}
@@ -460,26 +460,26 @@ void Btree<T, degree, Compare>::linkAtLeft(const T &k, Btree &lhs)
 
 template <typename T,int degree,class Compare = less<T>>
 void Btree<T, degree, Compare>::link(const T &k, Btree &linkedTree)
-{//Á¬½Ó×ª·¢º¯Êı£¬°´ÒÔÏÂËÄÖÖÇé¿ö×ª·¢¡£Ç°ÌáÊÇÁ½Ê÷¾ù²»¿Õ
+{//è¿æ¥è½¬å‘å‡½æ•°ï¼ŒæŒ‰ä»¥ä¸‹å››ç§æƒ…å†µè½¬å‘ã€‚å‰ææ˜¯ä¸¤æ ‘å‡ä¸ç©º
 	if (compare(this->root->key[0], k) && compare(k,linkedTree.root->key[0]))
-	{//1¡¢ÈÎÒâkey[this] < k < key[linkedTree]¡£ÕâÀï²ÉÓÃ¸ùµÄ0ºÅ¹Ø¼ü×ÖÖ»ÊÇÇø·ÖÒ»ÏÂÊÇºÎÖÖÁ¬½Ó£¬
-		//ÎÒÃÇ¼ÙÉè¸ø¶¨µÄ¹Ø¼ü×ÖºÍÊ÷Âú×ãÉÏÊö¹ØÏµ£¬ÏÂÍ¬
-		if (this->root->height >= linkedTree.root->height)//1.1 ±¾Ê÷½Ï¸ß»òÕßºÍ±»Á¬½ÓÊ÷Ò»Ñù¸ß
-			linkAtRight(k, linkedTree);//ÔòÔÚ±¾Ê÷ÓÒ²àÁ¬½Ó
+	{//1ã€ä»»æ„key[this] < k < key[linkedTree]ã€‚è¿™é‡Œé‡‡ç”¨æ ¹çš„0å·å…³é”®å­—åªæ˜¯åŒºåˆ†ä¸€ä¸‹æ˜¯ä½•ç§è¿æ¥ï¼Œ
+		//æˆ‘ä»¬å‡è®¾ç»™å®šçš„å…³é”®å­—å’Œæ ‘æ»¡è¶³ä¸Šè¿°å…³ç³»ï¼Œä¸‹åŒ
+		if (this->root->height >= linkedTree.root->height)//1.1 æœ¬æ ‘è¾ƒé«˜æˆ–è€…å’Œè¢«è¿æ¥æ ‘ä¸€æ ·é«˜
+			linkAtRight(k, linkedTree);//åˆ™åœ¨æœ¬æ ‘å³ä¾§è¿æ¥
 		else
-		{//1.2 ·ñÔò±¾Ê÷½Ï°«
-			swap(root, linkedTree.root);//½»»»Á½Ê÷
-			linkAtLeft(k, linkedTree);//ÔÚĞÂµÄ±¾Ê÷×ó²àÁ¬½Ó
+		{//1.2 å¦åˆ™æœ¬æ ‘è¾ƒçŸ®
+			swap(root, linkedTree.root);//äº¤æ¢ä¸¤æ ‘
+			linkAtLeft(k, linkedTree);//åœ¨æ–°çš„æœ¬æ ‘å·¦ä¾§è¿æ¥
 		}
 	}
 	else if (compare(linkedTree.root->key[0], k) && compare(k, this->root->key[0]))
-	{//2¡¢key[this] > k > key[linkedTree]
-		if (linkedTree.root->height < this->root->height)//2.1 Èô±¾Ê÷¸ß
-			linkAtLeft(k, linkedTree);//ÔòÔÚ±¾Ê÷×ó²àÁ¬½Ó
+	{//2ã€key[this] > k > key[linkedTree]
+		if (linkedTree.root->height < this->root->height)//2.1 è‹¥æœ¬æ ‘é«˜
+			linkAtLeft(k, linkedTree);//åˆ™åœ¨æœ¬æ ‘å·¦ä¾§è¿æ¥
 		else
-		{//2.2 ·ñÔò±¾Ê÷½Ï°«»òÕßºÍ±»Á¬½ÓÊ÷Ò»Ñù¸ß
-			swap(root, linkedTree.root);//Ôò½»»»Á½Ê÷
-			linkAtRight(k, linkedTree);//ÔÚĞÂµÄ±¾Ê÷ÓÒ²àÁ¬½Ó
+		{//2.2 å¦åˆ™æœ¬æ ‘è¾ƒçŸ®æˆ–è€…å’Œè¢«è¿æ¥æ ‘ä¸€æ ·é«˜
+			swap(root, linkedTree.root);//åˆ™äº¤æ¢ä¸¤æ ‘
+			linkAtRight(k, linkedTree);//åœ¨æ–°çš„æœ¬æ ‘å³ä¾§è¿æ¥
 		}
 	}
 	else
@@ -492,13 +492,13 @@ void Btree<T, degree, Compare>::link(const T &k, Btree &linkedTree)
 
 template <typename T,int degree,class Compare = less<T>>
 node<T, degree, Compare>* Btree<T, degree, Compare>::underfillSplit(node *curr, int index)
-{//Î´Âú·ÖÁÑ£¬½«curr½Úµã´Óindex´¦Ò»·ÖÎª¶ş
+{//æœªæ»¡åˆ†è£‚ï¼Œå°†currèŠ‚ç‚¹ä»indexå¤„ä¸€åˆ†ä¸ºäºŒ
 	node *new_child = new node;
-	for (int i = index + 1; i < curr->num; ++i)//ÒÆ¶¯indexÖ®ºóµÄ¹Ø¼üµ½ĞÂ½Úµã
+	for (int i = index + 1; i < curr->num; ++i)//ç§»åŠ¨indexä¹‹åçš„å…³é”®åˆ°æ–°èŠ‚ç‚¹
 		new_child->key[i - index - 1] = curr->key[i];
 	if (!curr->leaf)
-	{//Èô²»ÊÇÒ¶×Ó
-		for (int i = index + 1; i <= curr->num; ++i)//Ôò»¹ÒªÒÆ¶¯º¢×ÓÖ¸Õë
+	{//è‹¥ä¸æ˜¯å¶å­
+		for (int i = index + 1; i <= curr->num; ++i)//åˆ™è¿˜è¦ç§»åŠ¨å­©å­æŒ‡é’ˆ
 			new_child->child[i - index - 1] = curr->child[i];
 	}
 	new_child->num = curr->num - index - 1;
@@ -510,44 +510,44 @@ node<T, degree, Compare>* Btree<T, degree, Compare>::underfillSplit(node *curr, 
 
 template <typename T, int degree, class Compare = less<T> >
 void Btree<T,degree,Compare>::splitTree(const T &k, Btree &smallTree,Btree &bigTree)
-{//ÒÔÕÒÑ°¹Ø¼ü×ÖkµÄÂ·¾¶p·Ö¸îÊ÷£¬½«Ğ¡ÓÚkµÄ¼¯ºÏºÏ²¢ÎªsmallTree£¬´óµÄºÏ²¢ÎªbigTree¡£ÎÒÃÇ¼ÙÉèk´æÔÚ
+{//ä»¥æ‰¾å¯»å…³é”®å­—kçš„è·¯å¾„påˆ†å‰²æ ‘ï¼Œå°†å°äºkçš„é›†åˆåˆå¹¶ä¸ºsmallTreeï¼Œå¤§çš„åˆå¹¶ä¸ºbigTreeã€‚æˆ‘ä»¬å‡è®¾kå­˜åœ¨
 	node *curr = root; 	root = nullptr;
 	T small_link_key = T(), big_link_key = T();
 	while (true)
-	{//indexÊÇcurrÖĞµÚÒ»¸ö²»Ğ¡ÓÚkµÄ¹Ø¼ü×ÖË÷Òı£¬»òÕßcurrËùÓĞ¹Ø¼ü×Ö±Èk¶¼Ğ¡Ê±×îºóÒ»¸ö¹Ø¼ü×ÖË÷Òı
-		//µ«Õâ²¢²»Ó°Ïì·ÖÁÑ
+	{//indexæ˜¯currä¸­ç¬¬ä¸€ä¸ªä¸å°äºkçš„å…³é”®å­—ç´¢å¼•ï¼Œæˆ–è€…curræ‰€æœ‰å…³é”®å­—æ¯”kéƒ½å°æ—¶æœ€åä¸€ä¸ªå…³é”®å­—ç´¢å¼•
+		//ä½†è¿™å¹¶ä¸å½±å“åˆ†è£‚
 		int index = curr->search(k);
 		T temp = curr->key[index];
-		node *new_node = underfillSplit(curr, index);//·ÖÁÑ¸Ã½Úµã£¬·µ»ØĞÂÉú³ÉµÄ½ÚµãµØÖ·
+		node *new_node = underfillSplit(curr, index);//åˆ†è£‚è¯¥èŠ‚ç‚¹ï¼Œè¿”å›æ–°ç”Ÿæˆçš„èŠ‚ç‚¹åœ°å€
 		if (new_node->num == 0)
-		{//ÈôĞÂ½ÚµãÃ»ÓĞ¹Ø¼ü×Ö
+		{//è‹¥æ–°èŠ‚ç‚¹æ²¡æœ‰å…³é”®å­—
 			node *r = new_node;
 			new_node = new_node->child[0];
 			delete r;
 		}
 		if (curr->num == 0)
-		{//Èô·ÖÁÑºóµ±Ç°½Úµã²»ÔÙÓĞ¹Ø¼ü×Ö
+		{//è‹¥åˆ†è£‚åå½“å‰èŠ‚ç‚¹ä¸å†æœ‰å…³é”®å­—
 			node *r = curr;
 			curr = curr->child[0];
 			delete r;
 		}
 		if (compare(k, temp))
-		{//ÈôkĞ¡ÓÚindex´¦¹Ø¼ü×Ö£¬ÔòÒªÍù×ó×ß£¬ÕâÀïÎÒÃÇ²»ÔÙ¸üĞÂcurr£¬ÈÃÆäÔÚ¸Ãµã¼ÌĞøÑ­»·
+		{//è‹¥kå°äºindexå¤„å…³é”®å­—ï¼Œåˆ™è¦å¾€å·¦èµ°ï¼Œè¿™é‡Œæˆ‘ä»¬ä¸å†æ›´æ–°currï¼Œè®©å…¶åœ¨è¯¥ç‚¹ç»§ç»­å¾ªç¯
 			linkTwoTrees(bigTree, big_link_key, Btree(new_node));
-			big_link_key = temp;//¼ÇÏÂÕâÒ»´ÎµÄ·Ö¸î¹Ø¼ü×Ö£¬ÒÔ±¸ÏÂ´ÎÔÙÓÃ
+			big_link_key = temp;//è®°ä¸‹è¿™ä¸€æ¬¡çš„åˆ†å‰²å…³é”®å­—ï¼Œä»¥å¤‡ä¸‹æ¬¡å†ç”¨
 		}
 		else if (compare(temp, k))
-		{//·ñÔòÈôk´óÓÚindex´¦¹Ø¼ü×Ö£¬ÔòÒªÍùÓÒ×ß£¬ÕâÊÇÌØÊâÇé¿ö£¬µ±¸Ã½Úµã¹Ø¼ü×ÖÈ«²¿±ÈkĞ¡Ê±·¢Éú
+		{//å¦åˆ™è‹¥kå¤§äºindexå¤„å…³é”®å­—ï¼Œåˆ™è¦å¾€å³èµ°ï¼Œè¿™æ˜¯ç‰¹æ®Šæƒ…å†µï¼Œå½“è¯¥èŠ‚ç‚¹å…³é”®å­—å…¨éƒ¨æ¯”kå°æ—¶å‘ç”Ÿ
 			linkTwoTrees(smallTree, small_link_key, Btree(curr));
 			small_link_key = temp;
-			curr = new_node;//¸üĞÂcurr
+			curr = new_node;//æ›´æ–°curr
 		}
 		else
-		{//ÈôÏàµÈ£¬¼´ÒÑ¾­·Ö¸îÍê±Ï£¬ÄÇÃ´ºÏ²¢×óÓÒÁ½Ê÷£¬½áÊø
-			if (curr != nullptr)//Èç¹ûcurrÊÇÒ¶×Ó£¬ÇÒÈç¹û¾­¹ıÁËÉÏÃæifÓï¾ä(Âú×ãnumÎª0)µÄ´¦Àí£¬
-				//ÕâÊ±ºòcurrÓ¦µ±Îª¿Õ£¬²»ĞèÒªºÏ²¢
+		{//è‹¥ç›¸ç­‰ï¼Œå³å·²ç»åˆ†å‰²å®Œæ¯•ï¼Œé‚£ä¹ˆåˆå¹¶å·¦å³ä¸¤æ ‘ï¼Œç»“æŸ
+			if (curr != nullptr)//å¦‚æœcurræ˜¯å¶å­ï¼Œä¸”å¦‚æœç»è¿‡äº†ä¸Šé¢ifè¯­å¥(æ»¡è¶³numä¸º0)çš„å¤„ç†ï¼Œ
+				//è¿™æ—¶å€™curråº”å½“ä¸ºç©ºï¼Œä¸éœ€è¦åˆå¹¶
 				linkTwoTrees(smallTree, small_link_key, Btree(curr));
-			if (new_node != nullptr)//Í¬ÉÏÀí
+			if (new_node != nullptr)//åŒä¸Šç†
 				linkTwoTrees(bigTree, big_link_key, Btree(new_node));
 			break;
 		}
