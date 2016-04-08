@@ -1,3 +1,11 @@
+
+/*******************************************
+* Author: bravepam
+* E-mail:1372120340@qq.com
+* Blog:http://blog.csdn.net/zilingxiyue
+*******************************************
+*/
+
 #include<iostream>
 #include<algorithm>
 #include<fstream>
