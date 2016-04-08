@@ -1,11 +1,3 @@
-
-/*******************************************
-* Author: bravepam
-* E-mail:1372120340@qq.com
-* Blog:http://blog.csdn.net/zilingxiyue
-*******************************************
-*/
-
 #include<iostream>
 #include<algorithm>
 #include<fstream>
@@ -66,7 +58,7 @@ void AGraph::initGraph()
 {
 	size_t start, end;
 	size_t w;
-	ifstream infile("F:\\mst.txt");
+	ifstream infile("F:\\testdata\\mst.txt");
 	while (infile >> start >> end >> w)
 		add1Edge(start, end, w);
 }
@@ -144,10 +136,11 @@ size_t AGraph::kruskal(AGraph *mst)
 {//克鲁斯卡尔算法求最小生成树，返回最小权值和，最小生成树记录在mst中
 	struct findRoot:public binary_function<vector<size_t>,size_t,size_t>
 	{//局部函数对象类，用于查询并查集
-		size_t operator()(const vector<size_t> &UFS, size_t v)const
+		size_t operator()(vector<size_t> &UFS, size_t v)const
 		{
-			while (v != UFS[v]) v = UFS[v];
-			return v;
+			if (v == UFS[v]) return v;
+			UFS[v] = findRoot()(UFS, UFS[v]);//路径压缩
+			return UFS[v];
 		}
 	};
 	struct edgeCompare:public binary_function<edge,edge,bool>
@@ -160,7 +153,7 @@ size_t AGraph::kruskal(AGraph *mst)
 	vector<edge> E;
 	transformGraph(E);//将邻接链表转换为边集合
 	vector<size_t> UFS(nodenum + 1);
-	size_t sum = 0;
+	size_t sum = 0, cnt = 0;
 	for (size_t i = 1; i <= nodenum; ++i)
 		UFS[i] = i;//初始化并查集Union-Find-Set
 	sort(E.begin(), E.end(), edgeCompare());//对edge边按权值非递减排序
@@ -172,7 +165,9 @@ size_t AGraph::kruskal(AGraph *mst)
 			sum += E[i].weight;
 			mst->add2Edges(E[i].u, E[i].v, E[i].weight);
 			UFS[u_root] = v_root;
+			++cnt;
 		}
+		if (cnt == nodenum - 1) break;//选出n-1条即可
 	}
 	return sum;
 }
@@ -248,7 +243,7 @@ size_t main()
 	graph.initGraph();
 	graph.print();
 	cout << endl;
-	cout << graph.prim(&mst,5) << endl;
+	cout << graph.kruskal(&mst) << endl;
 	mst.print();
 	getchar();
 	return 0;
