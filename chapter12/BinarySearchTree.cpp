@@ -7,6 +7,7 @@
 */
 
 #include<iostream>
+#include<stack>
 
 using namespace std;
 template <typename T> class BSTree;
@@ -44,7 +45,11 @@ public:
 	void create();
 	node<T>* locate(const T&)const;
 	void preTraversal()const;
+	void preTraversalNotRecursive()const;
 	void inTraversal()const;
+	void inTraversalNotRecursive()const;
+	void postTraversal()const;
+	void postTraversalNotRecursive()const;
 	void erase(const T &);
 	node<T>* minMum()const;
 	node<T>* maxMum()const;
@@ -134,6 +139,26 @@ void BSTree<T>::preTraversal()const
 }
 
 template <typename T>
+void BSTree<T>::preTraversalNotRecursive()const
+{
+	if (!root) return;
+	stack<node<T>*> S;
+	node<T> *curr = nullptr;
+	S.push(root);
+	while (!S.empty())
+	{
+		curr = S.top();
+		S.pop();
+		cout << curr->data << ' ';
+		if (curr->right)
+			S.push(curr->right);
+		if (curr->left)
+			S.push(curr->left);
+	}
+	cout << endl;
+}
+
+template <typename T>
 void BSTree<T>::inTraversal()const
 {
 	node<T> *curr = root;
@@ -144,6 +169,75 @@ void BSTree<T>::inTraversal()const
 		cout << curr->data << ' ';
 		BSTree RIGHT(curr->right);//用右子树构建一个BSTree对象，继续递归
 		RIGHT.inTraversal();
+	}
+}
+
+template <typename T>
+void BSTree<T>::inTraversalNotRecursive()const
+{
+	if (!root) return;
+	node<T> *curr = root;
+	stack<node<T>*> S;
+	while (curr)
+	{
+		S.push(curr);
+		curr = curr->left;
+	}
+	while (!S.empty())
+	{
+		curr = S.top();
+		cout << curr->data << ' ';
+		S.pop();
+		if (curr->right)
+		{
+			curr = curr->right;
+			while (curr)
+			{
+				S.push(curr);
+				curr = curr->left;
+			}
+		}
+	}
+}
+
+template <typename T>
+void BSTree<T>::postTraversal()const
+{
+	node<T> *curr = root;
+	if (curr)
+	{
+		BSTree<T> LEFT(curr->left);
+		LEFT.postTraversal();
+		BSTree<T> RIGHT(curr->right);
+		RIGHT.postTraversal();
+		cout << curr->data << ' ';
+	}
+}
+
+template <typename T>
+void BSTree<T>::postTraversalNotRecursive()const
+{
+	if (!root) return;
+	node<T> *curr = nullptr, *prev = nullptr;
+	stack<node<T>*> S;
+	S.push(root);
+	while (!S.empty())
+	{
+		curr = S.top();
+		if ((!curr->right && !curr->left) || (curr->left && curr->left == prev)
+			|| (curr->right && curr->right == prev))
+		{
+			cout << curr->data << ' ';
+			S.pop();
+			prev = curr;
+		}
+		else
+		{
+			if (curr->right)
+				S.push(curr->right);
+			if (curr->left)
+				S.push(curr->left);
+		}
 	}
 }
 
@@ -412,7 +506,9 @@ int main()
 	btree.inTraversal();
 	/*cout <<  endl << btree.locate(19)->getData();*/
 	cout << endl << "btree.preTraversal()" << endl;
-	btree.preTraversal();
+	btree.postTraversal();
+	cout << endl;
+	btree.postTraversalNotRecursive();
 	cout << endl;
 	btree.levelTraversal_q();
 	btree.destroy();
