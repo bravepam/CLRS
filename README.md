@@ -34,8 +34,13 @@
     * [chapter31--有关数论的算法] (/chapter31)
     * [chapter32--字符串匹配](/chapter32)
 
+  * <strong>其他算法和数据结构</strong>
+
+  	* [SkipList（跳跃链表）](/others/skiplist)
+
   #Tips：
    * 某些纯理论章节没有代码
    * 除了讲述的数据结构和算法外，实现代码还包含绝大多数的与编程相关的习题和思考题
    * 一些实现细节以及部分数学题参看，Blog:http://blog.csdn.net/zilingxiyue
    * 由于过于花费时间，上述章节后几章的博客没写完；此外，前两部分（1-9章）学习的比较早，代码已丢失，抱歉
+   * others文件夹是一些没有在该书出现的算法和数据结构
