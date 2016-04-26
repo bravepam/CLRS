@@ -67,6 +67,9 @@ private:
 	void postTraversal(node *)const;
 	void destroy(node*);
 	void reverse();
+
+	binomial_heap& operator=(const binomial_heap&);
+	binomial_heap(const binomial_heap&);
 public:
 	binomial_heap(node *h, Compare c = Compare()) :head(h), compare(c){}
 	binomial_heap(Compare c = Compare()) :head(nullptr), compare(c){}

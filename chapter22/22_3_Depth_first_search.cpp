@@ -43,6 +43,9 @@ private:
 	void DFS_aux_Not_recursive(size_t u, size_t &time);
 	void printEdge();//打印图的边类型
 	void printVertex();//打印顶点信息
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n) :nodenum(n)
 	{

@@ -50,6 +50,9 @@ private:
 		if (p == nullptr) return -1;
 		else return p->height;
 	}
+
+	AVLTree& operator=(const AVLTree&);
+	AVLTree(const AVLTree&);
 public:
 	AVLTree() :root(nullptr), compare(){}
 	AVLTree(const CompareKey &c) :root(nullptr), compare(c){}

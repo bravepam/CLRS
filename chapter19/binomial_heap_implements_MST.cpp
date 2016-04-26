@@ -31,6 +31,9 @@ class AGraph
 private:
 	vector<edgeNode*> graph;
 	size_t nodenum;
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n = 0){ editGraph(n); }
 	void editGraph(size_t n)

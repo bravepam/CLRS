@@ -31,6 +31,9 @@ class AGraph
 private:
 	vector<edgeNode*> G;
 	size_t nodenum;
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n) :nodenum(n){ G.resize(n + 1); }
 	void initGraph();//初始化有向图

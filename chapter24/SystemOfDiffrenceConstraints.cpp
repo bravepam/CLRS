@@ -82,6 +82,9 @@ private:
 	}
 	void printCycle(size_t);
 	void SPT(AGraph*);//根据前驱子图构造最短路径树
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n = 0) :nodenum(n) { editGraph(n); }
 	void editGraph(size_t n)

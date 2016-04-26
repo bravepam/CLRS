@@ -91,6 +91,9 @@ private:
 	void printCycle(size_t);
 	void DFS();
 	void DFS_aux_Not_recursive(size_t, size_t&);
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n = 0) :nodenum(n) { editGraph(n); }
 	void editGraph(size_t n)

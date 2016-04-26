@@ -55,6 +55,9 @@ private:
 			next[i] = i + 1;
 		free = start_index;
 	}
+
+	list& operator=(const list&);
+	list(const list&);
 public:
 	list() :free(NOEXIST), head(NOEXIST), list_size(8)//-1表示空，最初链表有8个空间
 	{//初始化，设置free链表

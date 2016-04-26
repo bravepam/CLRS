@@ -108,6 +108,9 @@ private:
 	void consolidate();//合并根表
 	void print_aux(node*)const;
 	void destroy(node*);
+
+	fibonacci_heap& operator=(const fibonacci_heap&);
+	fibonacci_heap(const fibonacci_heap&);
 public:
 	fibonacci_heap(node *h = nullptr, const Compare &c = Compare()) :head(h), compare(c){}
 	fibonacci_heap(const Compare &c) :head(nullptr), compare(c){}

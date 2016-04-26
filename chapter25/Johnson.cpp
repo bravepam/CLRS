@@ -83,6 +83,9 @@ private:
 		}
 	}
 	void printCycle(size_t);
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n = 0) :nodenum(n) { editGraph(n); }
 	void editGraph(size_t n)

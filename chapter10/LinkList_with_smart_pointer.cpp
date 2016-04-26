@@ -19,6 +19,9 @@ private:
 	size_t use;//计数，表明有几个指针指向此对象
 	Node *next;
 	NodeUseCount(Node *p) :next(p), use(1){}
+
+	NodeUseCount& operator=(const NodeUseCount&);
+	NodeUseCount(const NodeUseCount&);
 };
 class Node
 {//节点类

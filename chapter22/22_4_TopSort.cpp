@@ -41,6 +41,9 @@ private:
 	void printEdge();
 	void printVertex();
 	void DFS_aux_Not_recursive(size_t, size_t &);//·ÇµÝ¹éµÄDFS¸¨Öúº¯Êý
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n) :nodenum(n)
 	{

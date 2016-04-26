@@ -22,6 +22,9 @@ private:
 	typedef size_t (*hash_function)(int,size_t);
 	vector<int> hash;//¹þÏ£±í
 	hash_function hash_fun;//¹þÏ£º¯Êý
+
+	hash_table& operator(const hash_table&);
+	hash_table(const hash_table&);
 public:
 	hash_table(hash_function h) :hash_fun(h), hash(hash_table_size)
 	{

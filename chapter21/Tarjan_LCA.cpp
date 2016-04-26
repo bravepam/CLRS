@@ -19,6 +19,9 @@ class AGraph
 private:
 	vector<edgeNode*> E;
 	size_t nodenum;
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n) :E(n + 1), nodenum(n){}
 	void initGraph();

@@ -41,6 +41,9 @@ private:
 	vector<edgeNode*> graph;
 	size_t nodenum;
 	void transformGraph(vector<edge>&);
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n = 0){editGraph(n); }
 	void editGraph(size_t n)

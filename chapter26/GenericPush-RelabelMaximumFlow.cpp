@@ -43,6 +43,9 @@ private:
 	void initializeFlow(size_t);
 	operation selectOperation(size_t,size_t&);
 	size_t selectVertex();
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n) :nodenum(n)
 	{

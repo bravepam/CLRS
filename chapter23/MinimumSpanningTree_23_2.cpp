@@ -62,6 +62,9 @@ private:
 	size_t nodenum;
 	void transformGraph(vector<edge>&);
 	void preMST(AGraph*, AGraph*, vector<edgeRef>&);
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n = 0){editGraph(n); }
 	void editGraph(size_t n)

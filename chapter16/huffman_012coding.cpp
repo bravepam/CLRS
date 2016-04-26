@@ -34,10 +34,18 @@ public:
 	void initQueue();//初始化队列
 	void createHuff();//构造哈夫曼树
 	void printCode();//打印字符编码
+	~huffmanTree()
+	{
+		destroy(root);
+	}
 private:
 	node *root;
 	priority_queue<node*, vector<node*>, comp> Q;
 	void printCode(node*, string&);//递归打印编码
+	void destroy(node*);
+
+	huffmanTree& operator=(const huffmanTree&);
+	huffmanTree(const huffmanTree&);
 };
 
 bool compare(node *lhs, node *rhs)
@@ -115,6 +123,15 @@ void huffmanTree::printCode(node *root, string &code = string(""))
 		printCode(curr->right, code);
 		code.pop_back();
 	}
+}
+
+void huffmanTree::destroy(node* root)
+{
+	if (!root) return;
+	destroy(root->left);
+	destroy(root->middle);
+	destroy(root->right);
+	delete root;
 }
 
 int main()

@@ -126,6 +126,9 @@ private:
 		split(root, 0);//树根分裂
 	}
 	explicit Btree(node *r) :root(r), compare(r->compare){}//只在分裂函数中被调用，私有
+
+	Btree& operator=(const Btree&);
+	Btree(const Btree&);
 public:
 	Btree() :root(nullptr), compare(Compare()){ node::setCompare(compare); }
 	Btree(const Compare &c) :root(nullptr), compare(c){ node::setCompare(c); }

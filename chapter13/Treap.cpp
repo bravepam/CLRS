@@ -45,6 +45,9 @@ private:
 	void eraseFixup(node*);//删除后调整
 	node* successor(node*)const;//求后继
 	int getRandomPriority()const;//取得一个随机优先级
+
+	treap& operator=(const treap&);
+	treap(const treap&);
 public:
 	treap() :root(nullptr){}
 	treap(node *r) :root(r){}

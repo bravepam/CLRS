@@ -20,6 +20,9 @@ class UseCount
 	Node *next;
 	Node *prev;
 	UseCount():use(1),next(NULL),prev(NULL){}
+
+	UseCount& operator=(const UseCount&);
+	Usecount(const UseCount&);
 };
 
 class Node

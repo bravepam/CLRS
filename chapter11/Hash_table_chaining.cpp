@@ -31,6 +31,10 @@ struct hash_table_list
 	hash_table_list_node<T>* search(const T&);
 	void print();//打印链表
 	void destroy();//销毁链表
+
+private:
+	hash_table_list& operator=(const hash_table_list&);
+	hash_table_list(const hash_table_list&);
 };
 
 template <typename T>
@@ -113,6 +117,9 @@ public:
 private:
 	vector<list> hash;//哈希表
 	hash_function hash_fun;//所用哈希函数
+
+	hash_table& operator=(const hash_table&);
+	hash_table(const hash_table&);
 public:
 	//所有具体操作转给链表
 	hash_table(hash_function h) :hash_fun(h), hash(hash_table_size){}

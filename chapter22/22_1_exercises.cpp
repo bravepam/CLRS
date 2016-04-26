@@ -31,6 +31,9 @@ private:
 	vector<edgeNode*> E;
 	size_t nodenum;
 	void printPath(size_t, size_t, vector<size_t>&);
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n) :nodenum(n)
 	{

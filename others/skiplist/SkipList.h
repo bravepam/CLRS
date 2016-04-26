@@ -115,6 +115,9 @@ private:
 	//跳到最后一个节点
 	node* findLast()const;
 
+	//避免复制构造或者赋值
+	skiplist& operator=(const skiplist&);
+	skiplist(const skiplist&);
 public:
 	skiplist() :head_(newNode(Key(),Value(), MaxHeight)),
 		curr_max_height_(1)

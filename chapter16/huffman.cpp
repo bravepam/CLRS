@@ -31,10 +31,18 @@ public:
 	void initQueue();//初始化节点队列
 	void createHuff();//构造哈夫曼树
 	void printCode();//打印哈弗曼编码
+	~huffmanTree()
+	{
+		destroy(root);
+	}
 private:
 	node *root;
 	priority_queue<node*, vector<node*>, comp> q;//队列，基于vector<node*>，比较器为comp类型
 	void printCode(node*,string&);
+	void destroy(node*);
+
+	huffmanTree& operator=(const huffmanTree&);
+	huffmanTree(const huffmanTree&);
 };
 
 void huffmanTree::printCode(node *root,string &code = string(""))
@@ -94,6 +102,14 @@ void huffmanTree::createHuff()
 		q.push(p);//新节点插入队列
 	}
 	root = q.top();//队列只剩下一个节点了，即为哈弗曼树根
+}
+
+void huffmanTree::destroy(node* root)
+{
+	if (!root) return;
+	destroy(root->left);
+	destroy(root->right);
+	delete root;
 }
 
 bool compare(node *pl, node *pr)

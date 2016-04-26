@@ -73,6 +73,9 @@ private:
 			V[i].id = i;
 	}
 	void editGraph(size_t n) { init(n + 1); }//修改图大小，并初始化
+
+	AGraph& operator=(const AGraph&);
+	AGraph(const AGraph&);
 public:
 	AGraph(size_t n = 0) :nodenum(n){ init(n + 1); }
 	void initGraph();//初始化有向图
