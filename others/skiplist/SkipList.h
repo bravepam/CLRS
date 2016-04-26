@@ -242,7 +242,7 @@ void skiplist<Key, Value, Comparator>::erase(const Key& key)
 	node* p = findGreaterOrEqual(key, prev); //获得各层前驱
 	assert(p && equal(key, p->key_));
 	//if (!p || !equal(key, p->key_)) return;
-	for (int i = 0; prev[i] && prev[i]->next(i) && equal(prev[i]->next(i)->key_, key); ++i)
+	for (int i = 0; i != MaxHeight && prev[i] && prev[i]->next(i) && equal(prev[i]->next(i)->key_, key); ++i)
 	{//删除该节点，则需要更新其前驱的后继。首先，前驱必须存在（比该节点高的层没有）；其次，
 		//prev[i]中存储是其紧邻的节点，因为findGreaterOrEqual得到的prev可能不是紧邻的
 		prev[i]->setNext(i, p->next(i));
