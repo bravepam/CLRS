@@ -1,0 +1,3 @@
+The sequence of key/value pairs in the file are stored in sorted order and partitioned into a sequence of data blocks. 
+These blocks come one after another at the beginning of the file.  Each data block is formatted according to the code 
+in block_builder.cc, and then optionally compressed.

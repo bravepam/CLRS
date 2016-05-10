@@ -37,6 +37,7 @@
   * <strong>其他算法和数据结构</strong>
 
   	* [SkipList（跳跃链表）](/others/skiplist)
+  	* [Bloom Filter(布隆过滤器)](/others/bloom filter&MurmurHash)
 
   #Tips：
    * 某些纯理论章节没有代码
