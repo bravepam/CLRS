@@ -171,7 +171,7 @@ void AGraph::DFS_aux(size_t u, size_t &time)
 			DFS_aux(curr->adjvertex, time);
 		}
 		else if (V[curr->adjvertex].c == GRAY)
-			curr->e = BLACK;
+			curr->e = BACK;
 		else
 		{
 			if (V[u].d < V[curr->adjvertex].d) curr->e = FORWARD;

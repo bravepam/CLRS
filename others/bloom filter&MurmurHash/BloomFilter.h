@@ -32,6 +32,9 @@ private:
 	const BloomArgs bloomargs;
 	string bloomfilter;
 	static murmurhash hash;
+
+	BloomFilter(const BloomFilter&);
+	BloomFilter& operator=(const BloomFilter&);
 public:
 	BloomFilter(int n_, double p_) :bloomargs(BloomArgs(n_, p_)){}
 	void createFilter(const vector<string>& keys)
@@ -60,6 +63,7 @@ public:
 			uint32_t bitpos = h1 % bloomargs.bits_num;
 			if ((bloomfilter[bitpos / 8] & (1 << (bitpos % 8))) == 0)
 				return false;//如果有任何一位为0，则说明必不存在
+			h1 += h2;
 		}
 		return true;
 	}
