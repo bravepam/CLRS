@@ -38,6 +38,7 @@
 
   	* [SkipList（跳跃链表）](/others/skiplist)
   	* [Bloom Filter(布隆过滤器)](/others/bloom filter&MurmurHash)
+  	* [Trie树](/others/Trie)
 
   #Tips：
    * 某些纯理论章节没有代码
