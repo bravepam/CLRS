@@ -1,0 +1,23 @@
+class trie
+private
+	struct node
+		int count
+		unordered map char node children
+		node count  children
+private
+	node root
+
+	void destroy node
+	void counting frequency node string vector pair string int const
+public
+	trie root new node
+	void create const vector string
+	void insert const string
+	int search const string const
+	vector pair string int counting frequency int int const
+	void clear
+		destroy root
+		root children clear
+	trie
+		clear
+		delete root
