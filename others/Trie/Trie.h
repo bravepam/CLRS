@@ -20,6 +20,9 @@ private:
 private:
 	node *root;
 
+	Trie(const Trie&);
+	Trie& operator=(const Trie&);
+
 	void destroy(node*);
 	void countingFrequency(node*, string&, vector<pair<string, int>>&)const;
 public:
